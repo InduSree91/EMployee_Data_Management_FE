@@ -1,0 +1,144 @@
+<form [formGroup]="addempForm" (ngSubmit)="onSubmit()">
+    <div class="h-16 m-1">
+        <div class="flex flex-row justify-around m-2" for="id">
+            <p class="font-bold">ID <span class="text-red-700">*</span></p>
+            @if(formMode === 'add'){
+            <input type="text" class="border-2 border-black rounded" formControlName="id" required>
+            }
+            @if(formMode === 'edit'){
+            <input type="text" class="border-2 border-black rounded" formControlName="id" readonly>
+            }
+
+        </div>
+        @if(addempForm.controls['id'].touched && !addempForm.controls['id'].valid){
+        <div class="text-center">
+            @if(addempForm.controls['id'].hasError('required')){
+            <p class="text-red-700">Id should be mentioned.</p>
+            }
+            @if(addempForm.controls['id'].hasError('pattern')){
+            <p class="text-red-700">Id should only contain numbers</p>
+            }
+        </div>
+        }
+    </div>
+    <div class="h-16 m-1">
+        <div class="flex flex-row justify-around m-2">
+            <p class="font-bold">Name <span class="text-red-700">*</span></p>
+            <input type="text" class="border-2 border-black rounded" formControlName="name" required>
+        </div>
+        @if(addempForm.controls['name'].touched && !addempForm.controls['name'].valid){
+        <div class="text-center">
+            @if(addempForm.controls['name'].hasError('required')){
+            <p class="text-red-700">Name should be mentioned.</p>
+            }
+            @if(addempForm.controls['name'].hasError('minlength') || addempForm.controls['name'].hasError('maxlength')){
+            <p class="text-red-700">Name should be between 2 to 100 characters.</p>
+            }
+            @if(addempForm.controls['name'].hasError('pattern')){
+            <p class="text-red-700">Name should only contain alphabets.</p>
+            }
+        </div>
+        }
+    </div>
+    <div class="h-16 m-1">
+        <div class="flex flex-row justify-around m-2">
+            <p class="font-bold">DOB <span class="text-red-700">*</span></p>
+            <input type="text" class="border-2 border-black rounded" formControlName="DOB" placeholder="dd/MM/yyyy"
+                required>
+        </div>
+        @if(addempForm.controls['DOB'].touched && !addempForm.controls['DOB'].valid){
+        <div class="text-center">
+            @if(addempForm.controls['DOB'].hasError('required')){
+            <p class="text-red-700">Date of Birth should be mentioned.</p>
+            }
+            @if(addempForm.controls['DOB'].hasError('pattern')){
+            <p class="text-red-700">Date should be mentioned in the format dd/MM/yyyy.</p>
+            }
+        </div>
+        }
+    </div>
+    <div class="h-16 m-1">
+        <div class="flex flex-row justify-around m-2">
+            <p class="font-bold">Gender <span class="text-red-700">*</span></p>
+            <p class="font-bold"><input type="radio" formControlName="gender" value="Male"> Male </p>
+            <p class="font-bold"><input type="radio" formControlName="gender" value="Female"> Female </p>
+        </div>
+    </div>
+    <div class="h-16 m-1">
+        <div class="flex flex-row justify-around m-2">
+            <p class="font-bold">Phone <span class="text-red-700">*</span></p>
+            <input type="text" class="border-2 border-black rounded" formControlName="phone" required>
+        </div>
+        @if(addempForm.controls['phone'].touched && !addempForm.controls['phone'].valid){
+        <div class="text-center">
+            @if(addempForm.controls['phone'].hasError('required')){
+            <p class="text-red-700">Phone number should be mentioned.</p>
+            }
+            @if(addempForm.controls['phone'].hasError('minlength') ||
+            addempForm.controls['phone'].hasError('maxlength')){
+            <p class="text-red-700">Phone number should only contain 10 characters.</p>
+            }
+            @if(addempForm.controls['phone'].hasError('pattern')){
+            <p class="text-red-700">Phone number is not valid. Phone number should only contains numbers.</p>
+            }
+        </div>
+        }
+    </div>
+    <div class="h-16 m-1">
+        <div class="flex flex-row justify-around m-2">
+            <p class="font-bold">Email <span class="text-red-700">*</span></p>
+            <input type="text" class="border-2 border-black rounded" formControlName="email" required>
+        </div>
+        @if(addempForm.controls['email'].touched && !addempForm.controls['email'].valid){
+        <div class="text-center">
+            @if(addempForm.controls['email'].hasError('required')){
+            <p class="text-red-700">Email should be mentioned.</p>
+            }
+            @if(addempForm.controls['email'].hasError('pattern')){
+            <p class="text-red-700">Email is not valid. Enter a valid email.</p>
+            }
+        </div>
+        }
+    </div>
+    <div class="flex flex-row justify-evenly">
+        @if(formMode === 'add'){
+        @if(!isSaving){
+        <button class="bg-blue-500 m-2 text-white py-2 px-8 rounded-md" type="submit"
+            [ngClass]="{'pointer-events-none opacity-40': !addempForm.valid}">Add</button>
+        }
+        @if(isSaving){
+            <button class="bg-blue-500 m-2 text-white py-2 px-8 rounded-md flex items-center" type="submit">
+                <svg class="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none"
+                    viewBox="0 0 24 24">
+                    <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                    <path class="opacity-75" fill="currentColor"
+                        d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z">
+                    </path>
+                </svg>
+                Add
+            </button>
+            }
+        }
+        @if(formMode === 'edit'){
+        @if(!isSaving){
+        <button class="bg-blue-500 m-2 text-white py-2 px-8 rounded-md" type="submit"
+            [ngClass]="{'pointer-events-none opacity-40': !addempForm.dirty || !addempForm.valid}">Save</button>
+        }
+        @if(isSaving){
+        <button class="bg-blue-500 m-2 text-white py-2 px-8 rounded-md flex items-center" type="submit">
+            <svg class="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none"
+                viewBox="0 0 24 24">
+                <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                <path class="opacity-75" fill="currentColor"
+                    d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z">
+                </path>
+            </svg>
+            Save
+        </button>
+        }
+        }
+        <button class="bg-red-600 m-2 text-white py-2 px-8 rounded-md" type="button" (click)="close()">Close</button>
+    </div>
+</form>
+
+<router-outlet></router-outlet>

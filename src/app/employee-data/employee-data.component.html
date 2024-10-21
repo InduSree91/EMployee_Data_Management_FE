@@ -1,0 +1,51 @@
+<div class="flex flex-row justify-center">
+  <h1 class="text-2xl font-bold m-2 text-left">Employee Data Management</h1>
+</div>
+
+<div class="body flex flex-col justify-center">
+  <div class="flex flex-row justify-end">
+    <button class="bg-blue-500 text-white py-2 px-12 rounded-lg mt-5 m-2 mr-10" (click)="addEmployee()">Add</button>
+  </div>
+  <table class="mr-10 ml-10 mb-10 border-collapse">
+    <thead>
+      <tr class="bg-blue-200">
+        <th class="border border-gray-400 px-4 py-2 text-gray-800">Id</th>
+        <th class="border border-gray-400 px-4 py-2 text-gray-800">Name</th>
+        <th class="border border-gray-400 px-4 py-2 text-gray-800">DOB</th>
+        <th class="border border-gray-400 px-4 py-2 text-gray-800">Age</th>
+        <th class="border border-gray-400 px-4 py-2 text-gray-800">Gender</th>
+        <th class="border border-gray-400 px-4 py-2 text-gray-800">Phone</th>
+        <th class="border border-gray-400 px-4 py-2 text-gray-800">Email</th>
+        <th class="border border-gray-400 px-4 py-2 text-gray-800">Action</th>
+      </tr>
+    </thead>
+
+    @if(isLoading){
+    <tbody>
+      <tr class="border border-gray-400 px-4 py-2 text-gray-800 text-lg text-center">
+        <td colspan="8">Loading...</td>
+      </tr>
+    </tbody>
+    }
+
+    @if(!isLoading){
+    @for (item of data.data; track item){
+    <tbody>
+      <tr class="text-center text-gray-800">
+        <td class="border border-gray-400 px-4 py-2">{{item.id}}</td>
+        <td class="border border-gray-400 px-4 py-2">{{item.name}}</td>
+        <td class="border border-gray-400 px-4 py-2">{{item.DOB}}</td>
+        <td class="border border-gray-400 px-4 py-2">{{item.age}}</td>
+        <td class="border border-gray-400 px-4 py-2">{{item.gender}}</td>
+        <td class="border border-gray-400 px-4 py-2">{{item.phone}}</td>
+        <td class="border border-gray-400 px-4 py-2">{{item.email}}</td>
+        <td class="border border-gray-400 px-4 py-2 flex justify-evenly">
+          <i class="fa-solid fa-pen m-2 cursor-pointer" style="color: blue;" (click)="editEmployee(item.id)"></i>
+          <i class="fa-solid fa-trash m-2 cursor-pointer" style="color: red;" (click)="deleteEmployee(item.id)"></i>
+        </td>
+      </tr>
+    </tbody>
+    }
+    }
+  </table>
+</div>
