@@ -20,7 +20,6 @@ export class AppComponent {
   router = inject(Router);
 
   ngOnInit(): void {
-    // this.router.navigate(['/employeeData']);
     this.router.navigate(['/home']);
   }
 }
