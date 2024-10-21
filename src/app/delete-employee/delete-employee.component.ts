@@ -49,10 +49,7 @@ export class DeleteEmployeeComponent {
           } else {
             this.showError(response.message);
           }
-          this.router.navigate(['/employeeData'])
-            .then(() => {
-            window.location.reload();
-          });
+          this.router.navigate(['/employeeData']);
         },
         error: (error) => {
           console.log(error);

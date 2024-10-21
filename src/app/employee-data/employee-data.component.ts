@@ -48,8 +48,5 @@ export class EmployeeDataComponent {
         this.isLoading = false;
       }
     });
-    // setTimeout(() => {
-    //   this.isLoading = false;
-    // }, 2000);
   }
 }

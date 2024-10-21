@@ -14,9 +14,7 @@ import { HomePageComponent } from './home-page/home-page.component';
 })
 export class AppComponent {
   title = 'Pet-Project-Frontend';
-
-  // constructor() {}
-
+  
   router = inject(Router);
 
   ngOnInit(): void {
